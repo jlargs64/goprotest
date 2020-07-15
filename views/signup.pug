@@ -9,6 +9,9 @@ block content
                 h1 Sign Up
                 form(action="/signup", method="post")
                     .form-group
+                        label(for='fullName') Full Name
+                        input#fullName.form-control(name="fullName", type='text')
+                    .form-group
                         label(for='email') Email address
                         input#email.form-control(name="email", type='email' aria-describedby='emailHelp')
                     .form-group
@@ -17,4 +20,4 @@ block content
                     .form-group
                         label(for='password2') Confirm Password
                         input#password2.form-control(name="password2",type='password')
-                    button(class="btn btn-primary btn-lg brand-color-background", type='submit') Submit
+                    button(class="btn btn-lg brand-color-background", type='submit') Submit

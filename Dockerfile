@@ -2,6 +2,7 @@ FROM node:12.18.2
 
 COPY views /views
 COPY bin /app/bin
+COPY utils /app/utils
 COPY routes /app/routes 
 COPY package.json /app/
 COPY app.js /app/

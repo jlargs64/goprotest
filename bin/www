@@ -8,6 +8,7 @@ require('dotenv').config();
 var app = require('../app');
 var debug = require('debug')('hackathon:server');
 var http = require('http');
+var pg = require('../utils/db');
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +29,7 @@ var server = http.createServer(app);
 
 server.listen(port, ()=>{
   //DB STUFF HERE
+  dbSetup();
   console.log(`Server started on http://localhost:${port}`)
 });
 server.on('error', onError);
@@ -91,4 +93,66 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+}
+
+function dbSetup(){
+  pg.schema.hasTable('users').then(function(exists) {
+    if (!exists) {
+      return pg.schema.createTable('users', function(t) {
+        t.increments('id').primary();
+        t.string('full_name', 100);
+        t.string('email', 100);
+        t.text('password');
+        t.string('profile_pic', 100);
+      });
+    }
+  });
+
+  pg.schema.hasTable('protests').then(function(exists) {
+    if (!exists) {
+      return pg.schema.createTable('protests', function(t) {
+        t.increments('id').primary();
+        t.string('name', 100);
+        t.text('bio');
+        t.string('protest_pic_url', 100);
+        t.string('password', 100);
+        t.boolean('is_public');
+        t.datetime('start_time');
+        t.string('zip_code', 5);
+      });
+    }
+  });
+
+  pg.schema.hasTable('comments').then(function(exists) {
+    if (!exists) {
+      return pg.schema.createTable('comments', function(t) {
+        t.increments('id').primary();
+        t.text('body');
+        t.integer('owner_id');
+        t.integer('protest_id');
+        t.datetime('time_posted').defaultTo(pg.fn.now());;
+      });
+    }
+  });
+
+  pg.schema.hasTable('user_protest_signup').then(function(exists) {
+    if (!exists) {
+      return pg.schema.createTable('user_protest_signup', function(t) {
+        t.increments('id').primary();
+        t.integer('user_id');
+        t.integer('protest_id');
+        t.enu('role', ['Attendee', 'Owner']);
+      });
+    }
+  });
+
+  pg.schema.table('comments', function (table) {
+    table.foreign('owner_id').references('users.id');
+    table.foreign('protest_id').references('protests.id');
+  });
+
+  pg.schema.table('user_protest_signup', function (table) {
+    table.foreign('user_id').references('users.id');
+    table.foreign('protest_id').references('protests.id');
+  });
 }

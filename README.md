@@ -11,13 +11,13 @@ goPROTEST is the ultimate app to help start, manage, join, and share peaceful pr
 
 ## How To Run goPROTEST Locally
 1) Clone the repository
-2) Create a vcap-local.json file to hold any DB2 credentials.
+2) Create a .env file to hold any DB credentials.
 3) Run the command `npm install`
 4) Start the dev server with `npm run dev` or the production server with `npm run start`
 
 ## How To Deploy goPROTEST To The IBM Cloud
 1) Make sure to create a cloud foundry application as well as a DB2 instance
-2) Create a vcap-local.json file to hold any DB2 credentials.
+2) Create a .env file to hold any DB credentials.
 3) Modify the manifest.yml to have the correct cloud foundry application name
 4) Download the IBMCloud CLI and the cloud foundry cli.
 5) Make sure to cd into the project directory and run `ibmcloud cf push`.
