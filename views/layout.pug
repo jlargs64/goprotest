@@ -8,17 +8,15 @@ html(lang="en")
   body
     header
       nav(class="navbar navbar-expand-lg navbar-light bg-light")
-        a(class="navbar-brand" href="/") goPROTEST
+        a(class="navbar-brand" style="color: #ff9350;" href="/") goPROTEST
         button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#navbarToggler", aria-controls="navbarToggler", aria-expanded="false", aria-label="Toggle navigation")
           span(class="navbar-toggler-icon")
         div(class="collapse navbar-collapse", id="navbarToggler")
           ul(class="navbar-nav ml-auto mt-2 mt-lg-0")
             li(class="nav-item active")
-              a(class="nav-link", href="#") Login
+              a(class="nav-link", style="color: #ff9350;", href="/login") Login
             li(class="nav-item")
-              a(class="nav-link", href="#") Sign Up
-            li(class="nav-item")
-              a(class="nav-link", href="#") About
+              a(class="nav-link", style="color: #ff9350;", href="/signup") Sign Up
     div
       block content
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")

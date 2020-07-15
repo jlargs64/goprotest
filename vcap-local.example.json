@@ -1,0 +1,14 @@
+{
+  "services": {
+    "DB2": [
+      {
+        "credentials": {
+          "DSN":"TEST",
+          "UID":"TEST",
+          "PWD":"TEST"
+        },
+        "label": "DB2"
+      }
+    ]
+  }
+}

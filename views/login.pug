@@ -1,4 +1,19 @@
 extends layout
 
 block content
-    h1 Login
+    .row
+        .col
+            img(src="/images/protest2.png", class="img-fluid", alt="Protest")
+        .col
+            .container
+                h1 Login
+                form
+                    .form-group
+                        label(for='email') Email address
+                        input#email.form-control(type='email' aria-describedby='emailHelp')
+                    .form-group
+                        label(for='password') Password
+                        input#password.form-control(type='password')
+                    button(class="btn btn-primary btn-lg brand-color-background", type='submit') Submit
+
+                
