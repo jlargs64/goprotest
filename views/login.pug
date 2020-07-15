@@ -7,13 +7,13 @@ block content
         .col
             .container
                 h1 Login
-                form
+                form(action="/login", method="post")
                     .form-group
                         label(for='email') Email address
-                        input#email.form-control(type='email' aria-describedby='emailHelp')
+                        input#email.form-control(name="email" type='email' aria-describedby='emailHelp')
                     .form-group
                         label(for='password') Password
-                        input#password.form-control(type='password')
+                        input#password.form-control(name="password" type='password')
                     button(class="btn btn-primary btn-lg brand-color-background", type='submit') Submit
 
                 

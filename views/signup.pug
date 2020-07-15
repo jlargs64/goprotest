@@ -7,14 +7,14 @@ block content
         .col
             .container
                 h1 Sign Up
-                form
+                form(action="/signup", method="post")
                     .form-group
                         label(for='email') Email address
-                        input#email.form-control(type='email' aria-describedby='emailHelp')
+                        input#email.form-control(name="email", type='email' aria-describedby='emailHelp')
                     .form-group
                         label(for='password') Password
-                        input#password.form-control(type='password')
+                        input#password.form-control(name="password",type='password')
                     .form-group
                         label(for='password2') Confirm Password
-                        input#password2.form-control(type='password')
+                        input#password2.form-control(name="password2",type='password')
                     button(class="btn btn-primary btn-lg brand-color-background", type='submit') Submit
