@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('hackathon:server');
 var http = require('http');
 var cfenv = require("cfenv");
+var ibmdb = require('ibm_db'); 
 
 // load local VCAP configuration  and service credentials
 var vcapLocal;
