@@ -1,8 +1,10 @@
 FROM node:12.18.2
 
-ADD views /views
-ADD package.json /app
-ADD app.js /app
+COPY views /views
+COPY bin /app/bin
+COPY routes /app/routes 
+COPY package.json /app/
+COPY app.js /app/
 
 RUN cd /app; npm install
 

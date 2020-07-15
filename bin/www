@@ -7,22 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('hackathon:server');
 var http = require('http');
-var cfenv = require("cfenv");
-var ibmdb = require('ibm_db'); 
-
-// load local VCAP configuration  and service credentials
-var vcapLocal;
-try {
-  vcapLocal = require('../vcap-local.json');
-  console.log("Loaded local VCAP", vcapLocal);
-} catch (e) { 
-  console.log(e);
-}
-
-const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}
-
-const appEnv = cfenv.getAppEnv(appEnvOpts);
-//appEnv.services.DB2[0].credentials
 
 /**
  * Get port from environment and store in Express.
@@ -106,22 +90,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-}
-
-function dbSetup() {
-  const connStr = `DSN=[${appEnv.services.DB2[0].credentials.DSN}];UID=[${appEnv.services.DB2[0].credentials.UID}];PWD=${appEnv.services.DB2[0].credentials.PWD}`;
-  ibmdb.open(connStr, function (err, conn) {
-    
-    conn.prepare('CREATE TABLE BRD70630.users ( id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1), \
-    full_name VARCHAR(32) NOT NULL ,email VARCHAR(32) NOT NULL ,password VARCHAR(32) NOT NULL ,profile_pic_url VARCHAR(32) ) ORGANIZE BY COLUMN', function (err, stmt) { 
-
-      stmt.execute(function (err, affectedRowCount) { 
-      }); 
-  
-     });
-
-    conn.close(function (err) {
-      console.log('Done'); 
-    }); 
-  });
 }
