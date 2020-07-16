@@ -42,7 +42,7 @@ router.post('/create', function (req, res, next) {
   var city = req.body.city;
   var state = req.body.state;
   var zipCode = req.body.zipCode;
-  console.log(req.body);
+
   pg('protests')
     .returning('id')
     .insert({
