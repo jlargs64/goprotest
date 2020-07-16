@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    .container-fluid
+        h1 Protests
+        .row
+            .col-2
+                a(class="btn btn-lg btn-block brand-color-background" href=`/protests/create`) Create
+                h2 Filter
+                .form-check
+                    input(class="form-check-input" type="checkbox" id="manager" name="manager")
+                    label(for="manager") My Protests
+            .col-10
+                if protests.length === 0
+                    h2 There are no protests in your area!
+                else 
+                    .row
+                        .col
+                            each protest in protests
+                                if protest.is_public
+                                    .row
+                                        .card
+                                            .card-body
+                                                .col-2
+                                                    img(src="/images/profile-placeholder.png" class="img-fluid" alt="Protest picture")
+                                                .col-10
+                                                    h2=protest.name
+                                                    p=protest.bio
+                                                    p=protest.start_time
+                                                    p=protest.address
+

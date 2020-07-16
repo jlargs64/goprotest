@@ -8,7 +8,8 @@ block content
             .col-10
                 h1 #{user.full_name}
                 h2 #{user.email}
-                a(class="btn btn-large brand-color-background" href=`/users/${id}/edit`) Edit Profile
+                if userId === id
+                    a(class="btn btn-large brand-color-background" href=`/users/${id}/edit`) Edit Profile
         .row
             .col(style="padding-left: 0px;")
                 h2 Protests

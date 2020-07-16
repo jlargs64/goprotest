@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    .container
+        h1 Create A Protest
+        .row
+            .col
+                form(action="protests/create" method="post")
+                    .form-group
+                        label(for='name') Name
+                        input#name.form-control(name="name" type='text' required)
+                    .form-group
+                        label(for='bio') About
+                        input#bio.form-control(name="bio" type='text' required)
+                    .form-group
+                        label(for='startDate') Start Date
+                        input#startDate.form-control(name="startDate" type='date' required)
+                    .form-group
+                        label(for='startTime') Start Time
+                        input#startTime.form-control(name="startTime" type='time' required)    
+                    .form-group
+                        label(for='password2') Confirm Password
+                        input#password2.form-control(name="password2" type='password' required)
+                    button(class="btn btn-lg brand-color-background" type='submit') Submit

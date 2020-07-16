@@ -1,31 +1,47 @@
-.brand-color{
-    color: #ff9350;
+.brand-color {
+  color: #ff9350;
 }
 
-.brand-color-background{
-    color: white;
-    background-color: #ff9350;
-    border-color: #ff9350;
+.brand-color-background {
+  color: white;
+  background-color: #ff9350;
+  border-color: #ff9350;
 }
 
-.brand-color-background:hover{
-    color: #ff9350;
-    background-color: white;
+.brand-color-background:hover {
+  color: #ff9350;
+  background-color: white;
 }
 
-.jumbotron.call-to-action{
-    width: 100%;
-    min-height: 50vh;
-    height: 10%;
-    background-image: url("/images/protest.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-color: #cccccc;
+.jumbotron.call-to-action {
+  width: 100%;
+  min-height: 50vh;
+  height: 10%;
+  background-image: url('/images/protest.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: #cccccc;
 
-    background-blend-mode: screen;
+  background-blend-mode: screen;
 }
 
-p{
-    font-size: 1.3rem;
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.content {
+  min-height: 100%;
+}
+.content-inside {
+  padding-bottom: 50px;
+}
+.footer {
+  height: 50px;
+  margin-top: -50px;
+}
+
+p {
+  font-size: 1.3rem;
 }

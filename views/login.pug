@@ -3,17 +3,17 @@ extends layout
 block content
     .row
         .col
-            img(src="/images/protest2.png", class="img-fluid", alt="Protest")
+            img(src="/images/protest2.png" class="img-fluid" alt="Protest")
         .col
             .container
                 h1 Login
-                form(action="/login", method="post")
+                form(action="/login" method="post")
                     .form-group
                         label(for='email') Email address
                         input#email.form-control(name="email" type='email' aria-describedby='emailHelp')
                     .form-group
                         label(for='password') Password
                         input#password.form-control(name="password" type='password')
-                    button(class="btn btn-lg brand-color-background", type='submit') Submit
-
-                
+                    button(class="btn btn-lg brand-color-background" type='submit') Submit
+                p Don't have an account? 
+                    a(href="/signup") Join now

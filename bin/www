@@ -27,10 +27,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, ()=>{
+server.listen(port, () => {
   //DB STUFF HERE
   dbSetup();
-  console.log(`Server started on http://localhost:${port}`)
+  console.log(`Server started on http://localhost:${port}`);
 });
 server.on('error', onError);
 server.on('listening', onListening);
@@ -64,9 +64,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -89,16 +87,14 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
 
-function dbSetup(){
-  pg.schema.hasTable('users').then(function(exists) {
+function dbSetup() {
+  pg.schema.hasTable('users').then(function (exists) {
     if (!exists) {
-      return pg.schema.createTable('users', function(t) {
+      return pg.schema.createTable('users', function (t) {
         t.increments('id').primary();
         t.string('full_name', 100);
         t.string('email', 100);
@@ -108,36 +104,38 @@ function dbSetup(){
     }
   });
 
-  pg.schema.hasTable('protests').then(function(exists) {
+  pg.schema.hasTable('protests').then(function (exists) {
     if (!exists) {
-      return pg.schema.createTable('protests', function(t) {
+      return pg.schema.createTable('protests', function (t) {
         t.increments('id').primary();
         t.string('name', 100);
         t.text('bio');
         t.string('protest_pic_url', 100);
-        t.string('password', 100);
-        t.boolean('is_public');
+        t.boolean('is_public').defaultTo(true);
         t.datetime('start_time');
+        t.string('address', 100);
+        t.string('city', 100);
+        t.string('state', 100);
         t.string('zip_code', 5);
       });
     }
   });
 
-  pg.schema.hasTable('comments').then(function(exists) {
+  pg.schema.hasTable('comments').then(function (exists) {
     if (!exists) {
-      return pg.schema.createTable('comments', function(t) {
+      return pg.schema.createTable('comments', function (t) {
         t.increments('id').primary();
         t.text('body');
         t.integer('owner_id');
         t.integer('protest_id');
-        t.datetime('time_posted').defaultTo(pg.fn.now());;
+        t.datetime('time_posted').defaultTo(pg.fn.now());
       });
     }
   });
 
-  pg.schema.hasTable('user_protest_signup').then(function(exists) {
+  pg.schema.hasTable('user_protest_signup').then(function (exists) {
     if (!exists) {
-      return pg.schema.createTable('user_protest_signup', function(t) {
+      return pg.schema.createTable('user_protest_signup', function (t) {
         t.increments('id').primary();
         t.integer('user_id');
         t.integer('protest_id');

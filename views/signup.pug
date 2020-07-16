@@ -3,21 +3,25 @@ extends layout
 block content
     .row
         .col
-            img(src="/images/protest3.png", class="img-fluid", alt="Protest")
+            img(src="/images/protest3.png" class="img-fluid" alt="Protest")
         .col
             .container
                 h1 Sign Up
-                form(action="/signup", method="post")
+                form(action="/signup" method="post")
                     .form-group
                         label(for='fullName') Full Name
-                        input#fullName.form-control(name="fullName", type='text')
+                        input#fullName.form-control(name="fullName" type='text')
                     .form-group
                         label(for='email') Email address
-                        input#email.form-control(name="email", type='email' aria-describedby='emailHelp')
+                        input#email.form-control(name="email" type='email' aria-describedby='emailHelp')
                     .form-group
                         label(for='password') Password
-                        input#password.form-control(name="password",type='password')
+                        input#password.form-control(name="password" type='password')
                     .form-group
                         label(for='password2') Confirm Password
-                        input#password2.form-control(name="password2",type='password')
-                    button(class="btn btn-lg brand-color-background", type='submit') Submit
+                        input#password2.form-control(name="password2" type='password')
+                    button(class="btn btn-lg brand-color-background" type='submit') Submit
+                p Have an account? 
+                    a(href="/login") Login here
+                if signerr
+                    h2 #{signerr.param} #{signerr.msg}
