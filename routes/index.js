@@ -10,7 +10,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-  res.render('login');
+  if (req.isAuthenticated()) {
+    res.redirect('/');
+  } else {
+    res.render('login');
+  }
 });
 
 router.post('/login', function (req, res, next) {
@@ -21,11 +25,17 @@ router.post('/login', function (req, res, next) {
     .where({
       email: email,
     })
-    .select('password')
+    .select('id', 'password')
     .then((rows) => {
       if (rows.length > 0) {
         bcrypt.compare(password, rows[0].password).then(function (result) {
-          res.redirect('/');
+          req.login(rows[0], function (err) {
+            if (err) {
+              return next(err);
+            }
+            req.app.locals.userId = rows[0].id;
+            return res.redirect(`/users/${rows[0].id}`);
+          });
         });
       } else {
         res.redirect('/login');
@@ -34,7 +44,11 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/signup', function (req, res, next) {
-  res.render('signup');
+  if (req.isAuthenticated()) {
+    res.redirect('/');
+  } else {
+    res.render('signup');
+  }
 });
 
 router.post('/signup', function (req, res, next) {
@@ -59,10 +73,12 @@ router.post('/signup', function (req, res, next) {
             bcrypt.hash(password, salt, function (err, hash) {
               // Save user to DB
               pg('users')
+                .returning('id')
                 .insert({ full_name: fullName, email: email, password: hash })
-                .then(function () {
+                .then(function (id) {
                   // Redirect to profile
-                  res.redirect('/');
+                  req.app.locals.userId = rows[0].id;
+                  res.redirect(`/users/${id}`);
                 });
             });
           });
@@ -72,6 +88,12 @@ router.post('/signup', function (req, res, next) {
     // Redirect back to sign up with error
     res.redirect('/login');
   }
+});
+
+router.get('/logout', function (req, res, next) {
+  req.logout();
+  delete req.app.locals.userId;
+  res.redirect('/');
 });
 
 module.exports = router;

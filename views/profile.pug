@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .container(style="padding-top: 2vh;")
+        .row   
+            .col-2(style="padding-left: 0px;")
+                img(src="/images/profile-placeholder.png" class="img-fluid" alt="Profile picture")
+            .col-10
+                h1 #{user.full_name}
+                h2 #{user.email}
+                a(class="btn btn-large brand-color-background" href=`/users/${id}/edit`) Edit Profile
+        .row
+            .col(style="padding-left: 0px;")
+                h2 Protests
+                hr
+                p Test
+        .row
+            .col(style="padding-left: 0px;")
+                h2 Past Protests
+                hr
+                p Test

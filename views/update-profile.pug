@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container(style="padding-top: 2vh;")
+        .row   
+            .col-2(style="padding-left: 0px;")
+                img(src="/images/profile-placeholder.png" class="img-fluid" alt="Profile picture")
+            .col-10
+                form(action=`/users/${id}/edit` method="post")
+                    .form-group
+                        label(for='fullName') Name
+                        input#fullName.form-control(name="fullName" type='text' value=user.full_name)
+                    .form-group
+                        label(for='email') Email address
+                        input#email.form-control(name="email" type='email' aria-describedby='emailHelp' value=user.email)
+                    button(class="btn btn-lg brand-color-background" type='submit') Submit
+        .row
+            .col(style="padding-left: 0px;")
+                h2 Protests
+                hr
+                p Test
+        .row
+            .col(style="padding-left: 0px;")
+                h2 Past Protests
+                hr
+                p Test
