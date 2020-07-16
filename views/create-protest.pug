@@ -5,20 +5,36 @@ block content
         h1 Create A Protest
         .row
             .col
-                form(action="protests/create" method="post")
+                form(action="/protests/create" method="post")
                     .form-group
                         label(for='name') Name
                         input#name.form-control(name="name" type='text' required)
                     .form-group
                         label(for='bio') About
-                        input#bio.form-control(name="bio" type='text' required)
+                        textarea(class="form-control" name="bio" id="bioTextArea" rows="6" required)
+                    .row
+                        .col
+                            .form-group
+                                label(for='startDate') Start Date
+                                input#startDate.form-control(name="startDate" type='date' required)
+                        .col                    
+                            .form-group
+                                label(for='startTime') Start Time
+                                input#startTime.form-control(name="startTime" type='time' required) 
                     .form-group
-                        label(for='startDate') Start Date
-                        input#startDate.form-control(name="startDate" type='date' required)
-                    .form-group
-                        label(for='startTime') Start Time
-                        input#startTime.form-control(name="startTime" type='time' required)    
-                    .form-group
-                        label(for='password2') Confirm Password
-                        input#password2.form-control(name="password2" type='password' required)
-                    button(class="btn btn-lg brand-color-background" type='submit') Submit
+                        label(for='address') Address
+                        input#address.form-control(name="address" type='text' required)
+                    .row
+                        .col
+                            .form-group
+                                label(for='city') City
+                                input#city.form-control(name="city" type='text' required)
+                        .col   
+                            .form-group
+                                label(for='state') State
+                                input#state.form-control(name="state" type='text' required)
+                        .col
+                            .form-group
+                                label(for='zipCode') Zipcode
+                                input#zipCode.form-control(name="zipCode" type='number' required)
+                    button(class="btn btn-lg btn-block brand-color-background" type='submit') Submit

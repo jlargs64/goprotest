@@ -96,7 +96,7 @@ router.post(
                   .insert({ full_name: fullName, email: email, password: hash })
                   .then(function (id) {
                     // Redirect to profile
-                    req.app.locals.userId = rows[0].id;
+                    req.app.locals.userId = id;
                     res.redirect(`/users/${id}`);
                   });
               });

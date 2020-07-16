@@ -8,12 +8,16 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var logger = require('morgan');
 var passport = require('./passport-config.js');
+var helmet = require('helmet');
+// Gotta finish csurf protection
+//var csurf = require('csurf');
 
 // Routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var protestRouter = require('./routes/protest');
 
+//var csrfProtection = csrf({ cookie: true });
 var app = express();
 
 // view engine setup
@@ -34,6 +38,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(helmet());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
