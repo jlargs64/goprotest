@@ -27,20 +27,24 @@ router.get('/:id', function (req, res, next) {
 
 /* UPDATE a user by id. */
 router.get('/:id/edit', function (req, res, next) {
-  if (req.isAuthenticated() && req.app.locals.userId === id) {
-    var id = req.params.id;
-    pg('users')
-      .where({ id: id })
-      .select('full_name', 'email')
-      .limit(1)
-      .then(function (users) {
-        if (users.length === 1) {
-          const user = users[0];
-          res.render('update-profile.pug', { user: user, id: id });
-        } else {
-          res.redirect('/');
-        }
-      });
+  var id = req.params.id;
+  if (req.isAuthenticated()) {
+    if (req.app.locals.userId === parseInt(id, 10)) {
+      pg('users')
+        .where({ id: id })
+        .select('full_name', 'email')
+        .limit(1)
+        .then(function (users) {
+          if (users.length === 1) {
+            const user = users[0];
+            res.render('update-profile.pug', { user: user, id: id });
+          } else {
+            res.redirect('/');
+          }
+        });
+    } else {
+      res.redirect('/');
+    }
   } else {
     res.redirect('/login');
   }
@@ -53,7 +57,7 @@ router.post('/:id/edit', function (req, res, next) {
     var email = req.body.email;
     var fullName = req.body.fullName;
     // Check if logged in user owns that
-    if (req.app.locals.userId === id) {
+    if (req.app.locals.userId === parseInt(id, 10)) {
       pg('users')
         .where({ id: id })
         .update({ email: email, full_name: fullName })
