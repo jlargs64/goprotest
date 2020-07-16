@@ -6,18 +6,32 @@ var pg = require('../utils/db');
 router.get('/:id', function (req, res, next) {
   if (req.isAuthenticated()) {
     var id = req.params.id;
-    pg('users')
-      .where({ id: id })
-      .select('full_name', 'email')
-      .limit(1)
-      .then(function (users) {
-        if (users.length === 1) {
-          const user = users[0];
-          res.render('profile.pug', { user: user, id: id });
+    pg.select('u.full_name', 'u.email', 'p.id', 'p.name', 'p.start_time')
+      .from('users AS u')
+      .leftJoin('user_protest_signup AS up', 'up.user_id', 'u.id')
+      .leftJoin('protests AS p', 'up.protest_id', 'p.id')
+      .where('u.id', '=', id)
+      .then(function (protests) {
+        // console.log(protests);
+        if (protests.length > 0) {
+          const user = protests[0];
+          res.render('profile.pug', { user: user, id: id, protests: protests });
         } else {
           res.redirect('/');
         }
       });
+    // pg('users')
+    //   .where({ id: id })
+    //   .select('full_name', 'email')
+    //   .limit(1)
+    //   .then(function (users) {
+    //     if (users.length === 1) {
+    //       const user = users[0];
+    //       res.render('profile.pug', { user: user, id: id });
+    //     } else {
+    //       res.redirect('/');
+    //     }
+    //   });
   } else {
     res.redirect('/login');
   }

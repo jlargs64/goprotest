@@ -1,7 +1,30 @@
 extends layout
 
 block content
-    .container
+    .container(style="padding-top: 2vh;")
+        .row
+            .col-2 
+                img(src="/images/profile-placeholder.png" class="img-fluid mb-2" alt="Profile picture") 
+                a(href=`/protests/join/${protest.id}` class="btn btn-lg btn-block btn-success") Join Protest
+                a(href=`/protests/leave/${protest.id}` class="btn btn-lg btn-block btn-danger") Leave Protest
+            .col-10
+                h1=protest.name 
         .row
             .col
-                h1=protest.name
+                h2 Starts on #{startDate}
+                - var locationFull = `${protest.address}, ${protest.city}, ${protest.state} ${protest.zip_code}`
+                a(href=`https://www.google.com/maps/search/${locationFull}` target="_blank")               
+                    h3 Location: #{protest.address}, #{protest.city}, #{protest.state} #{protest.zip_code}
+            .col
+                h2 Weather Forcast:
+                p Coming soon...    
+        .row
+            .col
+                h3 About
+                hr
+                p=protest.bio
+        .row
+            .col
+                h3 Activity & Updates
+                hr
+                p Comments go here

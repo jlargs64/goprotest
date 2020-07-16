@@ -39,6 +39,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(helmet());
+// So we can format dates in pug
+app.locals.moment = require('moment');
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

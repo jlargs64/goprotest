@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('../utils/db');
+var moment = require('moment');
+//var axios = require('axios');
 
 /* GET protests listing. */
 router.get('/', function (req, res, next) {
@@ -27,9 +29,37 @@ router.get('/:id', function (req, res, next) {
     .select('*')
     .first()
     .then(function (row) {
-      console.log(row);
-      res.render('protest', { protest: row });
+      var formatDate = moment(row.start_time).format('LLL');
+      res.render('protest', { protest: row, startDate: formatDate });
     });
+});
+
+router.get('/join/:id', function (req, res, next) {
+  if (req.isAuthenticated()) {
+    var id = req.params.id;
+    // Check if protest exists
+    pg('protests')
+      .where({ id: id })
+      .first()
+      .then((result) => {
+        if (result) {
+          // Add user to attendees
+          pg('user_protest_signup')
+            .insert({
+              user_id: req.app.locals.userId,
+              protest_id: id,
+              role: 'Attendee',
+            })
+            .then(() => {
+              res.redirect(`../${id}`);
+            });
+        } else {
+          res.redirect('/protests');
+        }
+      });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 //Check post name

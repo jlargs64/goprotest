@@ -14,10 +14,18 @@ block content
         .row
             .col(style="padding-left: 0px;")
                 h2 Protests
-                hr
-                p Test
-        .row
-            .col(style="padding-left: 0px;")
-                h2 Past Protests
-                hr
-                p Test
+                .table-responsive
+                    table(class="table")
+                        thead
+                            tr
+                                th(scope="col") Name
+                                th(scope="col") Start Time
+                        tbody
+                            each protest in protests
+                                tr
+                                    th(scope="row")
+                                        a(href=`protests/${protest.id}`)
+                                            h2=protest.name
+                                    td
+                                        - var startDate = moment(protest.start_time).format('LLL');
+                                        p=startDate
