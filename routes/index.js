@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('../utils/db');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var saltRounds = 10;
 const { body, validationResult } = require('express-validator');
 

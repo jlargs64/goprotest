@@ -5,6 +5,7 @@ COPY bin /app/bin
 COPY utils /app/utils
 COPY routes /app/routes 
 COPY package.json /app/
+COPY passport-config.js /app/
 COPY app.js /app/
 
 RUN cd /app; npm install
