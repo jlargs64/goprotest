@@ -5,8 +5,10 @@ block content
         .row
             .col-2 
                 img(src="/images/profile-placeholder.png" class="img-fluid mb-2" alt="Profile picture") 
-                a(href=`/protests/join/${protest.id}` class="btn btn-lg btn-block btn-success") Join Protest
-                a(href=`/protests/leave/${protest.id}` class="btn btn-lg btn-block btn-danger") Leave Protest
+                if !signedUp
+                    a(href=`/protests/join/${protest.id}` class="btn btn-lg btn-block btn-success") Join Protest
+                else
+                    a(href=`/protests/leave/${protest.id}` class="btn btn-lg btn-block btn-danger") Leave Protest
             .col-10
                 h1=protest.name 
         .row
@@ -25,6 +27,17 @@ block content
                 p=protest.bio
         .row
             .col
+                h3 Key Information
+                hr
+                p Coming soon...
+        .row
+            .col-3(style="border-right: 1px solid rgba(0,0,0,.1); height: 20%; overflow-y:auto")
+                h3 People Going: #{count}
+                hr
+                p 
+                each entry in protests
+                    div #{entry.full_name}
+            .col-9
                 h3 Activity & Updates
                 hr
-                p Comments go here
+                p Coming soon...

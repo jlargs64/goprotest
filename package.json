@@ -1,6 +1,6 @@
 {
   "name": "goprotest",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -19,6 +19,7 @@
     "express-validator": "^6.6.0",
     "helmet": "^3.23.3",
     "http-errors": "^1.8.0",
+    "ibm-cos-sdk": "^1.6.1",
     "knex": "^0.21.2",
     "moment": "^2.27.0",
     "morgan": "^1.10.0",

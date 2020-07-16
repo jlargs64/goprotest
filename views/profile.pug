@@ -13,19 +13,24 @@ block content
                     a(class="btn btn-large brand-color-background" href=`/users/${id}/edit`) Edit Profile
         .row
             .col(style="padding-left: 0px;")
-                h2 Protests
-                .table-responsive
-                    table(class="table")
-                        thead
-                            tr
-                                th(scope="col") Name
-                                th(scope="col") Start Time
-                        tbody
-                            each protest in protests
+                h2 Your Protests
+                if protests.length === 1
+                    h3(class="text-center") You don't belong to any protests! 
+                        a(href="/protests") Join one here!
+                else
+                    .table-responsive
+                        table(class="table")
+                            thead
                                 tr
-                                    th(scope="row")
-                                        a(href=`protests/${protest.id}`)
-                                            h2=protest.name
-                                    td
-                                        - var startDate = moment(protest.start_time).format('LLL');
-                                        p=startDate
+                                    th(scope="col") Name
+                                    th(scope="col") Start Time
+                            tbody
+                                each protest in protests
+                                    if protest.name
+                                        tr
+                                            th(scope="row")
+                                                a(href=`/protests/${protest.id}`)
+                                                    h2=protest.name
+                                            td
+                                                - var startDate = moment(protest.start_time).format('LLL');
+                                                p=startDate

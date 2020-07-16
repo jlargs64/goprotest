@@ -20,18 +20,6 @@ router.get('/:id', function (req, res, next) {
           res.redirect('/');
         }
       });
-    // pg('users')
-    //   .where({ id: id })
-    //   .select('full_name', 'email')
-    //   .limit(1)
-    //   .then(function (users) {
-    //     if (users.length === 1) {
-    //       const user = users[0];
-    //       res.render('profile.pug', { user: user, id: id });
-    //     } else {
-    //       res.redirect('/');
-    //     }
-    //   });
   } else {
     res.redirect('/login');
   }
